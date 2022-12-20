@@ -1,0 +1,37 @@
+{
+    "type": "enum",
+    "title": {
+        "en": "Door State"
+    },
+    "getable": true,
+    "setable": false,
+    "values": [
+        {
+            "id": "closed",
+            "title": {
+                "en": "Closed"
+            }
+        },
+        {
+            "id": "closing",
+            "title": {
+                "en": "Closing"
+            }
+        },
+        {
+            "id": "opening",
+            "title": {
+                "en": "Opening"
+            }
+        },
+        {
+            "id": "open",
+            "title": {
+                "en": "Open"
+            }
+        }
+    ],
+    "uiComponent": "sensor",
+    "uiQuickAction": false,
+    "icon": "/assets/my_boolean_capability.svg"
+}
