@@ -1,0 +1,94 @@
+{
+    "triggers": [
+        {
+            "id": "door_close_request",
+            "title": {
+                "en": "Door Close Requested"
+            },
+            "hint": {
+                "en": "Garage door is asked to close via the UI"
+            }
+        },
+        {
+            "id": "door_open_request",
+            "title": {
+                "en": "Door Open Requested"
+            },
+            "hint": {
+                "en": "Garage door is asked to open via the UI"
+            }
+        }
+    ],
+    "actions": [
+        {
+            "id": "update_obstructed",
+            "title": {
+                "en": "Update obstructed..."
+            },
+            "titleFormatted": {
+                "en": "Mark the door [[obstructed]]"
+            },
+            "args": [
+                {
+                    "name": "obstructed",
+                    "type": "dropdown",
+                    "values": [
+                        {
+                            "id": "obstructed",
+                            "label": {
+                                "en": "Obstructed"
+                            }
+                        },
+                        {
+                            "id": "not_obstructed",
+                            "label": {
+                                "en": "Not Obstructued"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "update_door_state",
+            "title": {
+                "en": "Update door state..."
+            },
+            "titleFormatted": {
+                "en": "Track the door open state as [[new_state]]"
+            },
+            "args": [
+                {
+                    "name": "new_state",
+                    "type": "dropdown",
+                    "values": [
+                        {
+                            "id": "closed",
+                            "label": {
+                                "en": "Closed"
+                            }
+                        },
+                        {
+                            "id": "closing",
+                            "label": {
+                                "en": "Closing"
+                            }
+                        },
+                        {
+                            "id": "open",
+                            "label": {
+                                "en": "Open"
+                            }
+                        },
+                        {
+                            "id": "opening",
+                            "label": {
+                                "en": "Opening"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

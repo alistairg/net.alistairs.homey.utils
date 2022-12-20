@@ -1,0 +1,11 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Obstructed"
+    },
+    "getable": true,
+    "setable": false,
+    "uiComponent": "sensor",
+    "uiQuickAction": false,
+    "icon": "/assets/garage_door_obstructed.svg"
+}

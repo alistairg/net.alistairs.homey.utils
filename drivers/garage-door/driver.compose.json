@@ -5,11 +5,22 @@
   "class": "garagedoor",
   "capabilities": [
     "garagedoor_closed",
-    "alarm_generic",
+    "alarm_obstructed",
     "garage_door_state"
   ],
   "platforms": [
     "local"
+  ],
+  "pair": [
+    {
+      "id": "list_my_devices",
+      "template": "list_devices",
+      "navigation": { "next": "add_my_devices" }
+    },
+    {
+      "id": "add_my_devices",
+      "template": "add_devices"
+    }
   ],
   "connectivity": [],
   "images": {

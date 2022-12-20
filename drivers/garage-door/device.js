@@ -2,20 +2,41 @@
 
 const { Device } = require('homey');
 
-class MyDevice extends Device {
+class GarageDoorDevice extends Device {
 
   /**
    * onInit is called when the device is initialized.
    */
   async onInit() {
-    this.log('MyDevice has been initialized');
+    this.log('Garage Door has been initialized');
+
+    // Init variables
+    let device = this;
+    let tokens = {};
+    let state = {};
+
+    // Handle open/close requests
+    this.registerCapabilityListener("garagedoor_closed", async(closed) => {
+      this.log("garagedoor_closed - " + value);
+      //this.setCapabilityValue("alarm_obstructed", false);
+      //this.setCapabilityValue("garage_door_state", "closed");
+
+      if (!closed) {
+        this.driver.triggerOpenRequestFlow(device, tokens, state);
+      }
+      else {
+        this.driver.triggerCloseRequestFlow(device, tokens, state);
+      }
+
+    });
+
   }
 
   /**
    * onAdded is called when the user adds the device, called just after pairing.
    */
   async onAdded() {
-    this.log('MyDevice has been added');
+    this.log('Garage Door has been added');
   }
 
   /**
@@ -27,7 +48,7 @@ class MyDevice extends Device {
    * @returns {Promise<string|void>} return a custom message that will be displayed
    */
   async onSettings({ oldSettings, newSettings, changedKeys }) {
-    this.log('MyDevice settings where changed');
+    this.log('Garage Door settings were changed');
   }
 
   /**
@@ -36,16 +57,16 @@ class MyDevice extends Device {
    * @param {string} name The new name
    */
   async onRenamed(name) {
-    this.log('MyDevice was renamed');
+    this.log('Garage Door was renamed');
   }
 
   /**
    * onDeleted is called when the user deleted the device.
    */
   async onDeleted() {
-    this.log('MyDevice has been deleted');
+    this.log('Garage Door has been deleted');
   }
 
 }
 
-module.exports = MyDevice;
+module.exports = GarageDoorDevice;

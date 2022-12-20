@@ -26,6 +26,124 @@
     "name": "Alistair Galbraith",
     "email": "homey@alistairs.net"
   },
+  "flow": {
+    "triggers": [
+      {
+        "id": "door_close_request",
+        "title": {
+          "en": "Door Close Requested"
+        },
+        "hint": {
+          "en": "Garage door is asked to close via the UI"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=garage-door"
+          }
+        ]
+      },
+      {
+        "id": "door_open_request",
+        "title": {
+          "en": "Door Open Requested"
+        },
+        "hint": {
+          "en": "Garage door is asked to open via the UI"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=garage-door"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "update_obstructed",
+        "title": {
+          "en": "Update obstructed..."
+        },
+        "titleFormatted": {
+          "en": "Mark the door [[obstructed]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=garage-door"
+          },
+          {
+            "name": "obstructed",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "obstructed",
+                "label": {
+                  "en": "Obstructed"
+                }
+              },
+              {
+                "id": "not_obstructed",
+                "label": {
+                  "en": "Not Obstructued"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "update_door_state",
+        "title": {
+          "en": "Update door state..."
+        },
+        "titleFormatted": {
+          "en": "Track the door open state as [[new_state]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=garage-door"
+          },
+          {
+            "name": "new_state",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "closed",
+                "label": {
+                  "en": "Closed"
+                }
+              },
+              {
+                "id": "closing",
+                "label": {
+                  "en": "Closing"
+                }
+              },
+              {
+                "id": "open",
+                "label": {
+                  "en": "Open"
+                }
+              },
+              {
+                "id": "opening",
+                "label": {
+                  "en": "Opening"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "drivers": [
     {
       "name": {
@@ -34,11 +152,24 @@
       "class": "garagedoor",
       "capabilities": [
         "garagedoor_closed",
-        "alarm_generic",
+        "alarm_obstructed",
         "garage_door_state"
       ],
       "platforms": [
         "local"
+      ],
+      "pair": [
+        {
+          "id": "list_my_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_my_devices"
+          }
+        },
+        {
+          "id": "add_my_devices",
+          "template": "add_devices"
+        }
       ],
       "connectivity": [],
       "images": {
@@ -50,6 +181,17 @@
     }
   ],
   "capabilities": {
+    "alarm_obstructed": {
+      "type": "boolean",
+      "title": {
+        "en": "Obstructed"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "uiQuickAction": false,
+      "icon": "/assets/garage_door_obstructed.svg"
+    },
     "garage_door_state": {
       "type": "enum",
       "title": {
@@ -85,7 +227,7 @@
       ],
       "uiComponent": "sensor",
       "uiQuickAction": false,
-      "icon": "/assets/my_boolean_capability.svg"
+      "icon": "/assets/garage_door_state.svg"
     }
   }
 }

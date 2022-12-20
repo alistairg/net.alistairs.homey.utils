@@ -33,5 +33,5 @@
     ],
     "uiComponent": "sensor",
     "uiQuickAction": false,
-    "icon": "/assets/my_boolean_capability.svg"
+    "icon": "/assets/garage_door_state.svg"
 }
