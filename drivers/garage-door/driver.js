@@ -22,7 +22,6 @@ class GarageDoorDriver extends Driver {
   triggerOpenRequestFlow(device, tokens, state) {
     this._deviceOpenRequested
       .trigger(device, tokens, state)
-      .then(this.log)
       .catch(this.error)
   }
 
@@ -30,7 +29,6 @@ class GarageDoorDriver extends Driver {
   triggerCloseRequestFlow(device, tokens, state) {
     this._deviceCloseRequested
       .trigger(device, tokens, state)
-      .then(this.log)
       .catch(this.error)
   }
 
@@ -50,8 +48,19 @@ class GarageDoorDriver extends Driver {
       this.log("Door state update - " + simpleStringify(args));
       let device = args.device;
       let new_state = args.new_state;
-      return device.setCapabilityValue("garage_door_state", new_state)
-    })
+      return device
+        .setCapabilityValue("garage_door_state", new_state)
+        .then(args => {
+          if (new_state == "open") {
+            return device.setCapabilityValue("garagedoor_closed", false);
+          }
+          if (new_state == "closed") {
+            return device.setCapabilityValue("garagedoor_closed", true);
+          }
+
+          return true;
+        })
+    });
   }
 
   /**

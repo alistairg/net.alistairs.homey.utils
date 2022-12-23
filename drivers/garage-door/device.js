@@ -17,10 +17,7 @@ class GarageDoorDevice extends Device {
 
     // Handle open/close requests
     this.registerCapabilityListener("garagedoor_closed", async(closed) => {
-      this.log("garagedoor_closed - " + value);
-      //this.setCapabilityValue("alarm_obstructed", false);
-      //this.setCapabilityValue("garage_door_state", "closed");
-
+      this.log("garagedoor_closed - " + closed);
       if (!closed) {
         this.driver.triggerOpenRequestFlow(device, tokens, state);
       }
